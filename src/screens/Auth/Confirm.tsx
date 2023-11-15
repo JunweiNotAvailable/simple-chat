@@ -12,6 +12,7 @@ import Loading from '../Utils/Loading';
 type ParamList = {
   Detail: {
     username: string
+    name: string
   };
 }
 
@@ -33,13 +34,15 @@ const Confirm = () => {
       // create new user data
       const newUser: UserProps = {
         id: params.username,
-        name: params.username,
+        name: params.name,
         avatar: '',
+        background: '',
         createDate: new Date().toISOString(),
         isOnline: true,
         lastOnlineTime: '',
         currentChat: '',
         chats: [],
+        aboutMe: '',
       };
       await axios.post(`${config.api.data.single}/single`, {
         table: 'SimpleChat-Users',

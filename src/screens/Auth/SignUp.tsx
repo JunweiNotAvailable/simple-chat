@@ -10,6 +10,7 @@ const SignUp = () => {
 
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
+  const [name, setname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -35,7 +36,7 @@ const SignUp = () => {
           email: email
         }
       });
-      navigation.reset({ index: 0, routes: [{ name: 'Confirm' as never, params: { username: username } }] });
+      navigation.reset({ index: 0, routes: [{ name: 'Confirm' as never, params: { username: username, name: name } }] });
     } catch (error: any) {
       if (error.name === "UsernameExistsException") {
         setErrorMessage('用戶名稱已被使用');
@@ -50,7 +51,8 @@ const SignUp = () => {
       <KeyboardAvoidingView style={FormStyles.container}>
         <Text style={FormStyles.title}>註冊</Text>
         {errorMessage && <Text style={FormStyles.errorMessage}>{errorMessage}</Text>}
-        <TextInput placeholder='用戶名稱' value={username} style={[FormStyles.input]} onChangeText={text => setUsername(text)}/>
+        <TextInput placeholder='ID' value={username} style={[FormStyles.input]} onChangeText={text => setUsername(text)}/>
+        <TextInput placeholder='用戶名稱' value={name} style={[FormStyles.input]} onChangeText={text => setname(text)}/>
         <TextInput placeholder='Email' value={email} style={[FormStyles.input]} onChangeText={text => setEmail(text)}/>
         <TextInput placeholder='密碼' value={password} style={[FormStyles.input]} secureTextEntry onChangeText={text => setPassword(text)}/>
         <TextInput placeholder='確認密碼' value={password2} style={[FormStyles.input]} secureTextEntry onChangeText={text => setPassword2(text)}/>

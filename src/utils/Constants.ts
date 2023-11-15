@@ -59,11 +59,13 @@ export interface UserProps {
   id: string
   name: string
   avatar: string
+  background: string
   createDate: string
   isOnline: boolean
   lastOnlineTime: string
   currentChat: string
   chats: string[]
+  aboutMe: string
 }
 
 export interface ChatProps {
