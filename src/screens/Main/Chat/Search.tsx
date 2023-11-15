@@ -55,10 +55,15 @@ const Search = () => {
 
   const goToChat = (user: UserProps) => {
     if (!props) return;
-    props.setChatRoomId && props.setChatRoomId(getChatId(user.id));
     props.setChatUsers && props.setChatUsers([props.user?.id || '', user.id]);
+    props.setTrigger?.(!props.trigger);
     props.setOtherUser && props.setOtherUser(user);
-    navigation.navigate('ChatRoom' as never);
+    setTimeout(() => {
+      props.setChatRoomId && props.setChatRoomId(getChatId(user.id));
+    }, 10);
+    setTimeout(() => {
+      navigation.navigate('ChatRoom' as never);
+    }, 20);
   }
 
   return (
@@ -81,7 +86,7 @@ const Search = () => {
           <Pressable>
             {searchUsers.map((user, i) => {
               return (
-                <TouchableWithoutFeedback onPress={() => goToChat(user)}>
+                <TouchableWithoutFeedback key={`user-${i}`} onPress={() => goToChat(user)}>
                   <View style={styles.user}>
                     <View style={styles.avatar}>
                       <Image source={urls.avatar} style={styles.avatarImage}/>

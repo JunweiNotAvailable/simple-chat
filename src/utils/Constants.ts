@@ -1,5 +1,9 @@
 import { Platform } from "react-native";
 
+export const weekDays = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+export const hours = Array.from({ length: 24 }, (_, i) => i);
+export const minutes = Array.from({ length: 12 }, (_, i) => 5 * i);
+
 export const globalStyles = {
   safeArea: {
     paddingTop: Platform.OS === 'android' ? 20 : 0,
@@ -58,6 +62,8 @@ export interface UserProps {
   createDate: string
   isOnline: boolean
   lastOnlineTime: string
+  currentChat: string
+  chats: string[]
 }
 
 export interface ChatProps {
@@ -65,16 +71,13 @@ export interface ChatProps {
   name: string
   avatar: string
   users: string[]
-  lastMessageTime: string
-  lastMessageSender: string
   lastMessage: string
-  lastMessageStatus: string
 }
 
 export interface MessageProps {
   id: string
   senderId: string
-  chatRoomId: string
+  roomId: string
   time: string
   message: string
   readUsers: string[]

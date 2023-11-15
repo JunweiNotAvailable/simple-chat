@@ -11,11 +11,33 @@ export const getMinutesBetween = (t1: Date, t2: Date) => {
   return Math.abs(Math.floor(diff / 60000));
 }
 
-// get pretty online strin
-export const getPrettyOnlineString = (minutes: number) => {
-  if (minutes <= 10) return '目前在線上';
-  if (minutes <= 60) return `${minutes}分鐘前上線`;
-  if (minutes <= 1440) return `${Math.floor(minutes / 60)}小時前上線`;
-  if (minutes <= 43200) return `${Math.floor(minutes / 1440)}天前上線`;
-  return '很久以前上線';
+// get date string
+export const getDateString = (date: Date) => {
+  return `${date.getFullYear()}-${`${date.getMonth() + 1}`.padStart(2, '0')}-${`${date.getDate()}`.padStart(2, '0')}`;
+}
+
+// get time string (hh:mm)
+export const getTimeString = (time: Date) => {
+  return `${String(time.getHours()).padStart(2, '0')}:${String(time.getMinutes()).padStart(2, '0')}`
+}
+
+// convert 24 format to 12 format
+export const to12HourFormat = (time24: string) => {
+  const [hours, minutes] = time24.split(':').map(Number);
+  const period = hours >= 12 ? 
+    hours > 18 ? '晚上' : '下午'
+    : hours < 6 ? '凌晨' : '早上';
+  const hours12 = (hours % 12 || 12).toString();
+  return `${period}${hours12}:${minutes.toString().padStart(2, '0')}`;
+}
+
+// send event from pusher
+import Pusher from "pusher-js";
+export const sendEvent = () => {
+  const pusher = new Pusher("07ae5689578f057a0669", {
+    cluster: "ap3",
+  });
+  console.log(pusher.send_event('join', {
+    message: 'hello'
+  }));
 }

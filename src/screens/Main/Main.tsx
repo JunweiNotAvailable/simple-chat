@@ -14,25 +14,6 @@ const Main = () => {
 
   const props = useAppState();
 
-  useEffect(() => {
-    (async () => {
-      if (AppState.currentState === 'active' && props?.user) {
-        const updateUser: UserProps = { ...props.user, lastOnlineTime: new Date().toISOString() };
-        await axios.post(`${config.api.data.single}/single`, { table: 'SimpleChat-Users', data: updateUser });
-      }
-    })();
-    const updateInterval = setInterval(async () => {
-      // Update the last timestamp if it's active
-      if (AppState.currentState === 'active' && props?.user) {
-        const updateUser: UserProps = { ...props.user, lastOnlineTime: new Date().toISOString() };
-        await axios.post(`${config.api.data.single}/single`, { table: 'SimpleChat-Users', data: updateUser });
-      }
-    }, 300000); // 5 minutes
-  
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(updateInterval);
-  }, []);
-
   return (
     <Tab.Navigator screenOptions={{
       headerShown: false,

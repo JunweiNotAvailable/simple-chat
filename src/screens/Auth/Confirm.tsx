@@ -38,6 +38,8 @@ const Confirm = () => {
         createDate: new Date().toISOString(),
         isOnline: true,
         lastOnlineTime: '',
+        currentChat: '',
+        chats: [],
       };
       await axios.post(`${config.api.data.single}/single`, {
         table: 'SimpleChat-Users',

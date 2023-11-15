@@ -3,12 +3,10 @@ export const config = {
     data: {
       single: "https://lkwpju0wtl.execute-api.ap-northeast-1.amazonaws.com/prod",
       custom: "https://lkwpju0wtl.execute-api.ap-northeast-1.amazonaws.com/prod",
+      laijoig: "https://6qhbspfpzf.execute-api.ap-northeast-1.amazonaws.com/production",
     },
     s3: "https://3tdbs9e5ye.execute-api.ap-northeast-1.amazonaws.com/production",
-    webSocket: {
-      wss: "wss://xknkn2l47e.execute-api.ap-northeast-1.amazonaws.com/production/",
-      https: "https://xknkn2l47e.execute-api.ap-northeast-1.amazonaws.com/production/@connections",
-    }
+    pusher: "https://bxud2dbh61.execute-api.ap-northeast-1.amazonaws.com/prod",
   },
   cognito: {
     REGION: "ap-northeast-1",
