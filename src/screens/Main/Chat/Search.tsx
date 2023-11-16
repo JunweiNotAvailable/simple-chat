@@ -89,7 +89,7 @@ const Search = () => {
                 <TouchableWithoutFeedback key={`user-${i}`} onPress={() => goToChat(user)}>
                   <View style={styles.user}>
                     <View style={styles.avatar}>
-                      <Image source={urls.avatar} style={styles.avatarImage}/>
+                      <Image source={props.userUrls[user.id] ? { uri: props.userUrls[user.id] } : urls.avatar} style={styles.avatarImage}/>
                     </View>
                     <View style={styles.names}>
                       <Text style={styles.name}>{user.name}</Text>

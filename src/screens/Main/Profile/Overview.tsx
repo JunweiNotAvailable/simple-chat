@@ -101,8 +101,8 @@ const Overflow = () => {
         <Button icon={<View style={styles.editButtonText}>
           <Icon name='edit' size={16}/>
           <Text style={{ marginLeft: 6, fontSize: 15 }}>編輯</Text>
-        </View>} style={styles.editButton} onPress={() => {}}/>
-        <Button icon={<IoniconsIcon name='ellipsis-horizontal-outline' size={16}/>} style={styles.settingsButton} onPress={() => navigation.navigate('Settings' as never)}/>
+        </View>} style={styles.editButton} onPress={() => navigation.navigate('EditProfile' as never)}/>
+        <Button icon={<IoniconsIcon name='ellipsis-horizontal' size={16}/>} style={styles.settingsButton} onPress={() => navigation.navigate('Settings' as never)}/>
       </View>
 
       {/* about me */}

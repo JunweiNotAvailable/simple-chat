@@ -21,7 +21,9 @@ const Settings = () => {
 
   return (
     <SafeAreaView style={[styles.container, globalStyles.safeArea]}>
-      <View style={{ marginTop: 8, }}/>
+      {Platform.OS === 'android' && <Topbar back title='更多選項'/>}
+      <View style={{ marginTop: 12 }}/>
+      <Button text={'帳號'} style={styles.button} textStyle={styles.buttonText} onPress={() => {}}/>
       <Button text={'登出'} style={styles.button} textStyle={styles.buttonText} onPress={signOut}/>
     </SafeAreaView>
   )
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   button: {
-    paddingVertical: 16,
+    paddingVertical: 12,
     paddingHorizontal: 24,
   },
   buttonText: {

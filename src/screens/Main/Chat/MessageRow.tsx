@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import { MessageProps, globalStyles, weekDays } from '../../../utils/Constants'
+import { MessageProps, globalStyles, urls, weekDays } from '../../../utils/Constants'
 import { useAppState } from '../../../../AppContext'
 import { useChatState } from './ChatContext'
 import { getDateString, getTimeString, to12HourFormat } from '../../../utils/Functions'
@@ -28,7 +28,7 @@ const MessageRow: React.FC<Props> = ({ message, prevMessage, nextMessage }) => {
 
   return (
     isMe ?
-    <View style={[styles.container]}>
+    <View style={[styles.container, { marginTop: user?.id === prevMessage?.senderId ? 4 : 8 }]}>
       {(isTooFar(message, nextMessage) || nextMessage?.senderId !== user?.id) && <Text style={styles.smallTime}>{getTimeString(new Date(message.time))}</Text>}
       <View style={[styles.message, {
         borderTopRightRadius: prevMessage?.senderId === user?.id && !isTooFar(message, prevMessage) ? 8 : 16,
@@ -40,9 +40,9 @@ const MessageRow: React.FC<Props> = ({ message, prevMessage, nextMessage }) => {
     </View>
     :
 
-    <View style={[styles.containerOther]}>
+    <View style={[styles.containerOther, { marginTop: user?.id === prevMessage?.senderId ? 4 : 8 }]}>
       <View style={[styles.avatar]}>
-        {/* {nextMessage?.senderId === user?.id ? <></> : url ? <Image source={{ uri: url }} style={styles.avatarImage}/> : <Text style={styles.avatarText}>{user.name[0]}</Text>} */}
+        {nextMessage?.senderId === user?.id && !isTooFar(message, nextMessage) ? <></> : <Image source={props.userUrls[user?.id as string] ? { uri: props.userUrls[user?.id as string] } : urls.avatar} style={styles.avatarImage}/>}
       </View>
       <View style={[styles.message, styles.messageLeft, {
         borderTopLeftRadius: prevMessage?.senderId === user?.id && !isTooFar(message, prevMessage) ? 8 : 16,

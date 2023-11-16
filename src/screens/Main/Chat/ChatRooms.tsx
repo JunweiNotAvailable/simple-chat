@@ -122,15 +122,17 @@ const ChatRooms = () => {
       <ScrollView style={styles.chatRoomsView} >
         <Pressable>
           {props.chatRooms?.map((chat, i) => {
+            const user = props.users?.find(u => chat.users.includes(u.id));
+            const url = props.userUrls[user?.id as string];
             return (
               <TouchableWithoutFeedback key={`chat-${i}`} onPress={() => goToChat(chat, i)}>
                 <View style={styles.chatRow}>
                   <View style={styles.avatar}>
-                    <Image source={urls.avatar} style={styles.avatarImage}/>
+                    <Image source={url ? { uri: url } : urls.avatar} style={styles.avatarImage}/>
                   </View>
                   <View style={styles.info}>
                     <View style={styles.nameTime}>
-                      <Text style={styles.name}>{props.users?.find(u => chat.users.includes(u.id))?.name}</Text>
+                      <Text style={styles.name}>{user?.name}</Text>
                       <Text style={[styles.time, { fontWeight: props.user && props.user.id !== props.lastMessages?.[i].senderId && !props.lastMessages?.[i].readUsers.includes(props.user?.id) ? 'bold' : 'normal' }]}>{props.lastMessages && to12HourFormat(getTimeString(new Date(props.lastMessages[i].time)))}</Text>
                     </View>
                     <Text style={[styles.lastMessage, props.user && props.user.id !== props.lastMessages?.[i].senderId && !props.lastMessages?.[i].readUsers.includes(props.user?.id) ? { color: '#000', fontWeight: 'bold' } : {}]} numberOfLines={1} ellipsizeMode='tail'>{props.lastMessages?.[i].senderId === props.user?.id && '你: '}{props.lastMessages?.[i].message}</Text>
@@ -183,6 +185,7 @@ const styles = StyleSheet.create({
   avatarImage: {
     width: '100%',
     height: '100%',
+    borderRadius: 50,
   },
   info: {
     marginLeft: 16,

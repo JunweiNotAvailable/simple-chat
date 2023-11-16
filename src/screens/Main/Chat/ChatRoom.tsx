@@ -230,7 +230,7 @@ const ChatRoom = () => {
               navigation.goBack();
             }}/>
             <View style={[styles.avatar, { borderColor: !props.isInRoom ? '#ccc' : globalStyles.colors.online }]}>
-              <Image source={urls.avatar} style={styles.avatarImage}/>
+              <Image source={props.userUrls[props.otherUser?.id as string] ? { uri: props.userUrls[props.otherUser?.id as string] } : urls.avatar} style={styles.avatarImage}/>
             </View>
             <View style={styles.usernameGroup}>
               <Text style={styles.username} numberOfLines={1} ellipsizeMode='tail'>{props.otherUser?.name}</Text>
