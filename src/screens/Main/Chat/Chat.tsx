@@ -13,7 +13,11 @@ const Chat = () => {
     <ChatStateProvider>
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='ChatRooms'>
         <Stack.Screen name='ChatRooms' component={ChatRooms}/>
-        <Stack.Screen name='ChatRoom' component={ChatRoom}/>
+        <Stack.Screen name='ChatRoom' component={ChatRoom} options={{
+          gestureDirection: 'horizontal',
+          gestureEnabled: true,
+          fullScreenGestureEnabled: true,
+        }}/>
         <Stack.Screen name='Search' component={Search}/>
       </Stack.Navigator>
     </ChatStateProvider>

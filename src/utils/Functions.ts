@@ -31,8 +31,10 @@ export const to12HourFormat = (time24: string) => {
   return `${period}${hours12}:${minutes.toString().padStart(2, '0')}`;
 }
 
+import axios from "axios";
 // send event from pusher
 import Pusher from "pusher-js";
+import { config } from "./Config";
 export const sendEvent = () => {
   const pusher = new Pusher("07ae5689578f057a0669", {
     cluster: "ap3",
@@ -41,3 +43,36 @@ export const sendEvent = () => {
     message: 'hello'
   }));
 }
+
+// file & images
+
+// get extension from filename
+export const getExtension = (filename: string) => {
+  const extensionIndex = filename.lastIndexOf('.');
+    if (extensionIndex === -1) {
+      return '';
+    }
+    return filename.substring(extensionIndex);
+}
+
+// upload images to s3
+export const uploadImage = async (bucketName: string, imageName: string, url: string) => {
+  const imageBase64 = url.split(',')[1];
+  await axios.post(`${config.api.s3}/access-image`, {
+    bucketName: bucketName,
+    name: imageName,
+    image: imageBase64,
+  });
+};
+
+// get image from s3
+export const getImageUrl = async (bucketName: string, filename: string) => {
+  if (!filename) return '';
+  try {
+    const response = await axios.get(`${config.api.s3}/access-image?bucketName=${bucketName}&fileName=${filename}`);
+    return 'data:image/jpeg;base64,' + response.data;
+  } catch (error) {
+    return '';
+  }
+}
+

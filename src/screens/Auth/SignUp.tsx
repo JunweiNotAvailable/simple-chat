@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { globalStyles } from '../../utils/Constants';
 import Button from '../Utils/Button';
@@ -48,7 +48,7 @@ const SignUp = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={FormStyles.container}>
+      <KeyboardAvoidingView style={FormStyles.container} behavior={Platform.OS === 'android' ? undefined : 'padding'}>
         <Text style={FormStyles.title}>註冊</Text>
         {errorMessage && <Text style={FormStyles.errorMessage}>{errorMessage}</Text>}
         <TextInput placeholder='ID' value={username} style={[FormStyles.input]} onChangeText={text => setUsername(text)}/>
